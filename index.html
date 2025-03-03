@@ -177,7 +177,7 @@
 
             <div class="section">
                 <h2>Body Repair</h2>
-                <label><input type="checkbox" value="170" class="repair"> Minor Damage</label>
+                <label><input type="checkbox" value="180" class="repair"> Minor Damage</label>
                 <label><input type="checkbox" value="265" class="repair"> Moderate Damage</label>
                 <label><input type="checkbox" value="340" class="repair"> Heavy Damage</label>
                 <label><input type="checkbox" value="420" class="repair"> Severe Damage</label>
@@ -226,8 +226,8 @@
 
             <div class="section">
                 <h2>Oil Change & Repair Kit</h2>
-                <label><input type="checkbox" value="699" class="repair"> Motor Oil</label>
-                <label><input type="checkbox" value="899" class="repair"> Advance Repair Kit</label>
+                <label><input type="checkbox" value="699" class="repair"> Motor Oil Change</label>
+                <label><input type="checkbox" value="1099" class="repair"> Advance Repair Kit</label>
             </div>
         </div>
 
@@ -241,7 +241,7 @@
 
     <script>
 let vehicleMultiplier = 1.0;
-let selectedVehicleText = "Unknown Vehicle Type";
+let selectedVehicleText = "Unknown";
 
 document.querySelectorAll('input[name="vehicle"]').forEach(vehicle => {
     vehicle.addEventListener('change', function() {
@@ -291,7 +291,7 @@ function updateBill() {
 }
 
 function copyBill() {
-    let billText = `Vehicle Repair Bill of ${selectedVehicleText}:\n`;
+    let billText = `Repairing Bill of ${selectedVehicleText}:\n`;
     document.querySelectorAll('.bill-list li').forEach((li, index) => {
         if (index !== 0) billText += li.textContent + '\n';
     });
