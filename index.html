@@ -265,7 +265,7 @@ function updateBill() {
 
     let total = 0;
     let vehicleTypeHeader = document.createElement('li');
-    vehicleTypeHeader.innerHTML = `<strong>Vehicle Repair Bill of Vehicle Type (${selectedVehicleText}):</strong>`;
+    vehicleTypeHeader.innerHTML = `<strong>Vehicle Repair Bill of ${selectedVehicleText}:</strong>`;
     billList.appendChild(vehicleTypeHeader);
 
     document.querySelectorAll('.repair:checked').forEach(repair => {
@@ -290,7 +290,7 @@ function updateBill() {
 }
 
 function copyBill() {
-    let billText = `Vehicle Repair Bill of Vehicle Type ${selectedVehicleText}:\n`;
+    let billText = `Vehicle Repair Bill of ${selectedVehicleText}:\n`;
     document.querySelectorAll('.bill-list li').forEach((li, index) => {
         if (index !== 0) billText += li.textContent + '\n';
     });
