@@ -239,58 +239,64 @@
     </div>
 
     <script>
-        let vehicleMultiplier = 1.0;
+let vehicleMultiplier = 1.0;
+let selectedVehicleText = "Unknown Vehicle Type";
 
-        document.querySelectorAll('input[name="vehicle"]').forEach(vehicle => {
-            vehicle.addEventListener('change', function() {
-                vehicleMultiplier = parseFloat(this.value);
-                updateBill();
-            });
-        });
+document.querySelectorAll('input[name="vehicle"]').forEach(vehicle => {
+    vehicle.addEventListener('change', function() {
+        vehicleMultiplier = parseFloat(this.value);
+        selectedVehicleText = this.nextSibling.textContent.trim();
+        updateBill();
+    });
+});
 
-        document.querySelectorAll('.repair').forEach(repair => {
-            repair.addEventListener('change', updateBill);
-        });
+document.querySelectorAll('.repair').forEach(repair => {
+    repair.addEventListener('change', updateBill);
+});
 
-        document.querySelectorAll('.quantity').forEach(quantity => {
-            quantity.addEventListener('change', updateBill);
-        });
+document.querySelectorAll('.quantity').forEach(quantity => {
+    quantity.addEventListener('change', updateBill);
+});
 
-        function updateBill() {
-            const billList = document.querySelector('.bill-list');
-            const totalSpan = document.getElementById('total');
-            billList.innerHTML = '';
-            let total = 0;
+function updateBill() {
+    const billList = document.querySelector('.bill-list');
+    const totalSpan = document.getElementById('total');
+    billList.innerHTML = '';
 
-            document.querySelectorAll('.repair:checked').forEach(repair => {
-                let itemText = repair.nextSibling.textContent.trim();
-                let itemValue = parseFloat(repair.value) * vehicleMultiplier;
+    let total = 0;
+    let vehicleTypeHeader = document.createElement('li');
+    vehicleTypeHeader.innerHTML = `<strong>Vehicle Repair Bill of Vehicle Type (${selectedVehicleText}):</strong>`;
+    billList.appendChild(vehicleTypeHeader);
 
-                // For Door, Tire, and Window, get quantity selection value
-                const repairType = repair.getAttribute('data-repair');
-                if (repairType) {
-                    const quantity = parseInt(document.querySelector(`.quantity[data-repair="${repairType}"]`).value);
-                    itemValue *= quantity;
-                    itemText += ` (x${quantity})`; // Add quantity info to text
-                }
+    document.querySelectorAll('.repair:checked').forEach(repair => {
+        let itemText = repair.nextSibling.textContent.trim();
+        let itemValue = parseFloat(repair.value) * vehicleMultiplier;
 
-                total += itemValue;
-                let li = document.createElement('li');
-                li.textContent = `${itemText}: $${itemValue.toFixed(2)}`;
-                billList.appendChild(li);
-            });
-
-            totalSpan.textContent = total.toFixed(2);
+        // For Door, Tire, and Window, get quantity selection value
+        const repairType = repair.getAttribute('data-repair');
+        if (repairType) {
+            const quantity = parseInt(document.querySelector(`.quantity[data-repair="${repairType}"]`).value);
+            itemValue *= quantity;
+            itemText += ` (x${quantity})`; // Add quantity info to text
         }
 
-        function copyBill() {
-            let billText = 'Vehicle Repair Bill:\n';
-            document.querySelectorAll('.bill-list li').forEach(li => {
-                billText += li.textContent + '\n';
-            });
-            billText += `Total: $${document.getElementById('total').textContent}`;
-            navigator.clipboard.writeText(billText).then(() => alert('Bill copied to clipboard!'));
-        }
+        total += itemValue;
+        let li = document.createElement('li');
+        li.textContent = `${itemText}: $${itemValue.toFixed(2)}`;
+        billList.appendChild(li);
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+}
+
+function copyBill() {
+    let billText = `Vehicle Repair Bill of Vehicle Type ${selectedVehicleText}:\n`;
+    document.querySelectorAll('.bill-list li').forEach((li, index) => {
+        if (index !== 0) billText += li.textContent + '\n';
+    });
+    billText += `Total: $${document.getElementById('total').textContent}`;
+    navigator.clipboard.writeText(billText);
+}
     </script>
 </body>
 </html>
