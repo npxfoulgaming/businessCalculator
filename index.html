@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Roleplay Nepal Mechanic Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #1E2A47;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .options, .bill {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .options {
+            flex: 2;
+            min-width: 400px;
+        }
+
+        .bill {
+            flex: 1;
+            min-width: 300px;
+            border-left: 2px solid #ddd;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #2E3A59;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 1.1rem;
+            display: block;
+            margin: 5px 0;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        select {
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .copy-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .copy-btn:active {
+            background-color: #00408b;
+        }
+
+        .bill-list {
+            list-style: none;
+            padding: 0;
+            font-size: 1.2rem;
+        }
+
+        .bill-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .bill-list li:last-child {
+            border-bottom: none;
+        }
+
+        .bill-list strong {
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        .bill-list span {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .repair {
+            margin-right: 5px;
+        }
+
+        .quantity {
+            margin-top: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .options {
+                margin-bottom: 20px;
+            }
+
+            .bill {
+                border-left: none;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Legacy Roleplay Nepal Mechanic Calculator</h1>
+    <div class="container">
+        <div class="options">
+            <div class="section">
+                <h2>Vehicle Type</h2>
+                <label><input type="radio" name="vehicle" value="1"> For Only Extra Items and Repair</label>
+                <label><input type="radio" name="vehicle" value="1.1"> Motorcycle</label>
+                <label><input type="radio" name="vehicle" value="1.2"> Common Cars</label>
+                <label><input type="radio" name="vehicle" value="1.5"> SUV & Off-Road</label>
+                <label><input type="radio" name="vehicle" value="2"> Sports</label>
+                <label><input type="radio" name="vehicle" value="1.6"> Muscle</label>
+                <label><input type="radio" name="vehicle" value="2.5"> Super</label>
+                <label><input type="radio" name="vehicle" value="1.3"> Vans</label>
+                <label><input type="radio" name="vehicle" value="1.4"> Trucks</label>
+            </div>
+
+            <div class="section">
+                <h2>Engine Repair</h2>
+                <label><input type="checkbox" value="399" class="repair"> Minor Damage</label>
+                <label><input type="checkbox" value="799" class="repair"> Moderate Damage</label>
+                <label><input type="checkbox" value="1199" class="repair"> Heavy Damage</label>
+                <label><input type="checkbox" value="1399" class="repair"> Severe Damage</label>
+                <label><input type="checkbox" value="1599" class="repair"> Extremely Damage</label>
+            </div>
+
+            <div class="section">
+                <h2>Body Repair</h2>
+                <label><input type="checkbox" value="199" class="repair"> Minor Damage</label>
+                <label><input type="checkbox" value="399" class="repair"> Moderate Damage</label>
+                <label><input type="checkbox" value="599" class="repair"> Heavy Damage</label>
+                <label><input type="checkbox" value="799" class="repair"> Severe Damage</label>
+                <label><input type="checkbox" value="999" class="repair"> Extremely Damage</label>
+            </div>
+
+            <div class="section">
+                <h2>Additional Repair</h2>
+                <label><input type="checkbox" value="99" class="repair" data-repair="door"> Door
+                    <select class="quantity" data-repair="door">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                    </select>
+                </label>
+                <label><input type="checkbox" value="49" class="repair" data-repair="tire"> Tire
+                    <select class="quantity" data-repair="tire">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                    </select>
+                </label>
+                <label><input type="checkbox" value="79" class="repair" data-repair="window"> Window
+                    <select class="quantity" data-repair="window">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>Extra Repair & Reparing Items</h2>
+                <label><input type="checkbox" value="699" class="repair"> Motor Oil</label>
+                <label><input type="checkbox" value="899" class="repair"> Advance Repair Kit</label>
+            </div>
+        </div>
+
+        <div class="bill">
+            <h2>Repairing Bill</h2>
+            <ul class="bill-list"></ul>
+            <p><strong>Total: $<span id="total">0</span></strong></p>
+            <button class="copy-btn" onclick="copyBill()">Copy Bill</button>
+        </div>
+    </div>
+
+    <script>
+        let vehicleMultiplier = 1.0;
+
+        document.querySelectorAll('input[name="vehicle"]').forEach(vehicle => {
+            vehicle.addEventListener('change', function() {
+                vehicleMultiplier = parseFloat(this.value);
+                updateBill();
+            });
+        });
+
+        document.querySelectorAll('.repair').forEach(repair => {
+            repair.addEventListener('change', updateBill);
+        });
+
+        document.querySelectorAll('.quantity').forEach(quantity => {
+            quantity.addEventListener('change', updateBill);
+        });
+
+        function updateBill() {
+            const billList = document.querySelector('.bill-list');
+            const totalSpan = document.getElementById('total');
+            billList.innerHTML = '';
+            let total = 0;
+
+            document.querySelectorAll('.repair:checked').forEach(repair => {
+                let itemText = repair.nextSibling.textContent.trim();
+                let itemValue = parseFloat(repair.value) * vehicleMultiplier;
+
+                // For Door, Tire, and Window, get quantity selection value
+                const repairType = repair.getAttribute('data-repair');
+                if (repairType) {
+                    const quantity = parseInt(document.querySelector(`.quantity[data-repair="${repairType}"]`).value);
+                    itemValue *= quantity;
+                    itemText += ` (x${quantity})`; // Add quantity info to text
+                }
+
+                total += itemValue;
+                let li = document.createElement('li');
+                li.textContent = `${itemText}: $${itemValue.toFixed(2)}`;
+                billList.appendChild(li);
+            });
+
+            totalSpan.textContent = total.toFixed(2);
+        }
+
+        function copyBill() {
+            let billText = 'Vehicle Repair Bill:\n';
+            document.querySelectorAll('.bill-list li').forEach(li => {
+                billText += li.textContent + '\n';
+            });
+            billText += `Total: $${document.getElementById('total').textContent}`;
+            navigator.clipboard.writeText(billText).then(() => alert('Bill copied to clipboard!'));
+        }
+    </script>
+</body>
+</html>
