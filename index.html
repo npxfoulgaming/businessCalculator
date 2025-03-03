@@ -59,8 +59,9 @@
 
         label {
             font-size: 1.1rem;
-            display: block;
-            margin: 5px 0;
+            margin-right: 15px;
+            display: inline-block;
+            margin-bottom: 10px;
         }
 
         input[type="radio"],
@@ -168,20 +169,20 @@
 
             <div class="section">
                 <h2>Engine Repair</h2>
-                <label><input type="checkbox" value="210" class="repair"> Minor Damage</label>
-                <label><input type="checkbox" value="325" class="repair"> Moderate Damage</label>
-                <label><input type="checkbox" value="390" class="repair"> Heavy Damage</label>
-                <label><input type="checkbox" value="490" class="repair"> Severe Damage</label>
-                <label><input type="checkbox" value="590" class="repair"> Extremely Damage</label>
+                <label><input type="checkbox" value="210" class="repair" data-repair="engine"> Minor Damage</label>
+                <label><input type="checkbox" value="325" class="repair" data-repair="engine"> Moderate Damage</label>
+                <label><input type="checkbox" value="390" class="repair" data-repair="engine"> Heavy Damage</label>
+                <label><input type="checkbox" value="490" class="repair" data-repair="engine"> Severe Damage</label>
+                <label><input type="checkbox" value="590" class="repair" data-repair="engine"> Extremely Damage</label>
             </div>
 
             <div class="section">
                 <h2>Body Repair</h2>
-                <label><input type="checkbox" value="180" class="repair"> Minor Damage</label>
-                <label><input type="checkbox" value="265" class="repair"> Moderate Damage</label>
-                <label><input type="checkbox" value="340" class="repair"> Heavy Damage</label>
-                <label><input type="checkbox" value="420" class="repair"> Severe Damage</label>
-                <label><input type="checkbox" value="510" class="repair"> Extremely Damage</label>
+                <label><input type="checkbox" value="180" class="repair" data-repair="body"> Minor Damage</label>
+                <label><input type="checkbox" value="265" class="repair" data-repair="body"> Moderate Damage</label>
+                <label><input type="checkbox" value="340" class="repair" data-repair="body"> Heavy Damage</label>
+                <label><input type="checkbox" value="420" class="repair" data-repair="body"> Severe Damage</label>
+                <label><input type="checkbox" value="510" class="repair" data-repair="body"> Extremely Damage</label>
             </div>
 
             <div class="section">
@@ -289,17 +290,50 @@ function updateBill() {
     vehicleTypeHeader.innerHTML = `<strong>Repairing Bill of ${selectedVehicleText}:</strong>`;
     billList.appendChild(vehicleTypeHeader);
 
-    document.querySelectorAll('.repair:checked').forEach(repair => {
+    // Add engine repair section
+    const engineRepairs = document.querySelectorAll('.repair[data-repair="engine"]:checked');
+    engineRepairs.forEach(repair => {
         let itemText = repair.nextSibling.textContent.trim();
         let itemValue = parseFloat(repair.value) * vehicleMultiplier;
+        total += itemValue;
+        let li = document.createElement('li');
+        li.textContent = `Engine ${itemText}: $${itemValue.toFixed(2)}`;
+        billList.appendChild(li);
+    });
 
+    // Add body repair section
+    const bodyRepairs = document.querySelectorAll('.repair[data-repair="body"]:checked');
+    bodyRepairs.forEach(repair => {
+        let itemText = repair.nextSibling.textContent.trim();
+        let itemValue = parseFloat(repair.value) * vehicleMultiplier;
+        total += itemValue;
+        let li = document.createElement('li');
+        li.textContent = `Body ${itemText}: $${itemValue.toFixed(2)}`;
+        billList.appendChild(li);
+    });
+
+    // Add vehicle body part repair section (e.g., door, tire, window)
+    document.querySelectorAll('.repair:checked').forEach(repair => {
         const repairType = repair.getAttribute('data-repair');
-        if (repairType) {
+        if (repairType && repairType !== "engine" && repairType !== "body") {
+            let itemText = repair.nextSibling.textContent.trim();
+            let itemValue = parseFloat(repair.value) * vehicleMultiplier;
+
             const quantity = parseInt(document.querySelector(`.quantity[data-repair="${repairType}"]`).value);
             itemValue *= quantity;
             itemText += ` (x${quantity})`;
-        }
 
+            total += itemValue;
+            let li = document.createElement('li');
+            li.textContent = `${repairType.charAt(0).toUpperCase() + repairType.slice(1)} ${itemText}: $${itemValue.toFixed(2)}`;
+            billList.appendChild(li);
+        }
+    });
+
+    // Add additions (Motor Oil Change, Advance Repair Kit)
+    document.querySelectorAll('.repair:not([data-repair]):checked').forEach(repair => {
+        let itemText = repair.nextSibling.textContent.trim();
+        let itemValue = parseFloat(repair.value) * vehicleMultiplier;
         total += itemValue;
         let li = document.createElement('li');
         li.textContent = `${itemText}: $${itemValue.toFixed(2)}`;
@@ -317,7 +351,6 @@ function updateBill() {
 
     totalSpan.textContent = total.toFixed(2);
 }
-
 function copyBill() {
     let billText = `Repairing Bill of ${selectedVehicleText}:\n`;
     document.querySelectorAll('.bill-list li').forEach((li, index) => {
@@ -326,6 +359,6 @@ function copyBill() {
     billText += `Total: $${document.getElementById('total').textContent}`;
     navigator.clipboard.writeText(billText);
 }
-    </script>
+</script>
 </body>
 </html>
