@@ -89,6 +89,7 @@
             cursor: pointer;
             margin-top: 20px;
             transition: background-color 0.3s ease;
+            position: relative;
         }
 
         .copy-btn:hover {
@@ -97,6 +98,20 @@
 
         .copy-btn:active {
             background-color: #00408b;
+        }
+
+        .popup-message {
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #3f3f3f;
+            color: rgb(241, 241, 241);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: none;
+            white-space: nowrap;
         }
 
         .bill-list {
@@ -148,6 +163,7 @@
                 margin-top: 20px;
             }
         }
+    
     </style>
 </head>
 <body>
@@ -156,15 +172,15 @@
         <div class="options">
             <div class="section">
                 <h2>Vehicle Type</h2>
-                <label><input type="radio" name="vehicle" value="1"> Addition</label>
-                <label><input type="radio" name="vehicle" value="1.09"> Motorcycle</label>
-                <label><input type="radio" name="vehicle" value="1.1"> Common Cars</label>
-                <label><input type="radio" name="vehicle" value="1.2"> Vans</label>
-                <label><input type="radio" name="vehicle" value="1.29"> Trucks</label>
-                <label><input type="radio" name="vehicle" value="1.3"> SUV & Off-Road</label>
-                <label><input type="radio" name="vehicle" value="1.4"> Muscle</label>
-                <label><input type="radio" name="vehicle" value="1.49"> Sports</label>
-                <label><input type="radio" name="vehicle" value="1.59"> Super</label>
+                <label><input type="radio" name="vehicle" value="1"> For Addition</label>
+                <label><input type="radio" name="vehicle" value="1.1"> Motorcycle</label>
+                <label><input type="radio" name="vehicle" value="1.2"> Common Cars</label>
+                <label><input type="radio" name="vehicle" value="1.3"> Vans</label>
+                <label><input type="radio" name="vehicle" value="1.4"> Trucks</label>
+                <label><input type="radio" name="vehicle" value="1.5"> SUV & Off-Road</label>
+                <label><input type="radio" name="vehicle" value="1.6"> Muscle</label>
+                <label><input type="radio" name="vehicle" value="1.7"> Sports</label>
+                <label><input type="radio" name="vehicle" value="1.8"> Super</label>
             </div>
 
             <div class="section">
@@ -180,8 +196,8 @@
                 <h2>Body Repair</h2>
                 <label><input type="checkbox" value="180" class="repair" data-repair="body"> Minor Damage</label>
                 <label><input type="checkbox" value="265" class="repair" data-repair="body"> Moderate Damage</label>
-                <label><input type="checkbox" value="310" class="repair" data-repair="body"> Heavy Damage</label>
-                <label><input type="checkbox" value="410" class="repair" data-repair="body"> Severe Damage</label>
+                <label><input type="checkbox" value="340" class="repair" data-repair="body"> Heavy Damage</label>
+                <label><input type="checkbox" value="420" class="repair" data-repair="body"> Severe Damage</label>
                 <label><input type="checkbox" value="510" class="repair" data-repair="body"> Extremely Damage</label>
             </div>
 
@@ -252,7 +268,9 @@
             <h2>Repairing Bill</h2>
             <ul class="bill-list"></ul>
             <p><strong>Total: $<span id="total">0</span></strong></p>
-            <button class="copy-btn" onclick="copyBill()">Copy Bill</button>
+            <button class="copy-btn" onclick="copyBill()">Copy Bill
+                <span class="popup-message" id="popupMessage">bill copied!</span>
+            </button>
         </div>
     </div>
 
@@ -357,8 +375,20 @@ function copyBill() {
         if (index !== 0) billText += li.textContent + '\n';
     });
     billText += `Total: $${document.getElementById('total').textContent}`;
-    navigator.clipboard.writeText(billText);
+    navigator.clipboard.writeText("Bill content copied").then(() => {
+                let popup = document.getElementById("popupMessage");
+                popup.style.display = "block";
+
+                // Hide popup after 2 seconds
+                setTimeout(() => {
+                    popup.style.display = "none";
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+        
 }
+
 </script>
 </body>
 </html>
