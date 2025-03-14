@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="lscustoms.png" />
-    <title>Legacy Roleplay Nepal Mechanic Calculator</title>
+    <title>Legacy Roleplay Nepal - Mechanic Calculator</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -463,7 +463,7 @@ function updateBill() {
     for (const item in additions) {
         let { totalValue, quantity } = additions[item];
         let li = document.createElement('li');
-        li.textContent = `${item} (x${quantity}): $${totalValue.toFixed(2)}`;
+        li.textContent = `${item} (${quantity}x): $${totalValue.toFixed(2)}`;
         billList.appendChild(li);
         total += totalValue;
     }
