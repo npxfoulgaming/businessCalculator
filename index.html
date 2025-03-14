@@ -163,6 +163,50 @@
                 margin-top: 20px;
             }
         }
+        /* Custom discount input box styling */
+        .custom-discount-input {
+            padding: 8px;
+            margin-top: 10px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 20px;
+            width: 3500px; /* Same width as Copy Bill button */
+            text-align: center; /* Center the text inside the input */
+            transition: border-color 0.3s ease;
+        }
+
+        .custom-discount-input:focus {
+            outline: none;
+            border-color: #1e4de9; /* Green border on focus */
+        }
+
+        .discount-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .discount-options label {
+            margin: 10px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .discount-options label input {
+            margin-right: 10px;
+        }
+
+        .custom-discount-input {
+            margin-left: 5px;
+            width: 350px; /* Make it the same size as the Copy Bill button */
+        }
+
+        .discount-options label:last-child {
+            flex-grow: 1;
+            text-align: right;
+        }
     
     </style>
 </head>
@@ -258,18 +302,55 @@
 
             <div class="section">
                 <h2>Addition </h2>
-                <label><input type="checkbox" value="699" class="repair"> Motor Oil Change</label>
-                <label><input type="checkbox" value="899" class="repair"> Advance Repair Kit</label>
+                <label><input type="checkbox" value="699" class="repair" data-repair="motor"> Motor Oil Change
+                    <select class="quantity" data-repair="motor">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                <label><input type="checkbox" value="899" class="repair" data-repair="kit"> Advance Repair Kit
+                    <select class="quantity" data-repair="kit">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
             </div>
 
         </div>
 
         <div class="bill">
+            <h2>Discount</h2>
+            <label><input type="radio" name="discount" value="0"> No Discount</label>
+            <label><input type="radio" name="discount" value="0.1"> 10% Discount</label>
+            <label><input type="radio" name="discount" value="0.2"> 20% Discount</label>
+            <label><input type="radio" name="discount" value="0.4"> 40% Discount</label>
+            <label><input type="radio" name="discount" value="0.8"> 80% Discount</label>
+            <label><input type="radio" name="discount" value="1"> 100% Discount</label>
+
+            <label><strong>Custom Discount:</strong></label>
+            <input type="number" id="customDiscount" name="discountCustom" min="0" max="100" step="0.01" placeholder="Enter custom discount %" class="custom-discount-input">
+        
             <h2>Repairing Bill</h2>
             <ul class="bill-list"></ul>
             <p><strong>Total: $<span id="total">0</span></strong></p>
             <button class="copy-btn" onclick="copyBill()">Copy Bill
-                <span class="popup-message" id="popupMessage">bill copied!</span>
+                <span class="popup-message" id="popupMessage">bill copied successfully!</span>
             </button>
         </div>
     </div>
@@ -296,6 +377,22 @@ document.querySelectorAll('.quantity').forEach(quantity => {
 
 document.querySelectorAll('input[name="tow"]').forEach(tow => {
     tow.addEventListener('change', updateBill);
+});
+
+document.querySelectorAll('input[name="discount"]').forEach(discount => {
+    discount.addEventListener('change', updateBill);
+});
+
+// Handle "Enter" key press to apply custom discount
+document.getElementById('customDiscount').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        updateBill();  // Update the bill when "Enter" is pressed
+    }
+});
+
+// Handle clicking outside (losing focus) to apply custom discount
+document.getElementById('customDiscount').addEventListener('blur', function() {
+    updateBill();  // Update the bill when the input loses focus
 });
 
 function updateBill() {
@@ -330,35 +427,48 @@ function updateBill() {
         billList.appendChild(li);
     });
 
-    // Add vehicle body part repair section (e.g., door, tire, window)
-    document.querySelectorAll('.repair:checked').forEach(repair => {
-        const repairType = repair.getAttribute('data-repair');
-        if (repairType && repairType !== "engine" && repairType !== "body") {
-            let itemText = repair.nextSibling.textContent.trim();
+    // Create an object to store the additions and their total quantities
+    let additions = {};
+
+    // Add additional repairs (motor oil change, advance repair kit, etc.)
+    document.querySelectorAll('.repair:not([data-repair="engine"]):not([data-repair="body"])').forEach(repair => {
+        if (repair.checked) {
+            let itemText = repair.nextSibling.textContent.trim().split(" ")[0]; // Get the first word
             let itemValue = parseFloat(repair.value) * vehicleMultiplier;
 
-            const quantity = parseInt(document.querySelector(`.quantity[data-repair="${repairType}"]`).value);
-            itemValue *= quantity;
-            itemText += ` (x${quantity})`;
+            // Update the item text to full name for specific items
+            if (itemText === "Motor") {
+                itemText = "Motor Oil";
+            } else if (itemText === "Advance") {
+                itemText = "Advance Repair Kit";
+            }
 
-            total += itemValue;
-            let li = document.createElement('li');
-            li.textContent = `${repairType.charAt(0).toUpperCase() + repairType.slice(1)} ${itemText}: $${itemValue.toFixed(2)}`;
-            billList.appendChild(li);
+            let repairType = repair.getAttribute('data-repair');
+            let quantity = 1; // Default quantity
+            if (document.querySelector(`.quantity[data-repair="${repairType}"]`)) {
+                quantity = parseInt(document.querySelector(`.quantity[data-repair="${repairType}"]`).value);
+                itemValue *= quantity;
+            }
+
+            // Store the total price for the specific repair item and its quantity
+            if (!additions[itemText]) {
+                additions[itemText] = { totalValue: 0, quantity: 0 };
+            }
+            additions[itemText].totalValue += itemValue;
+            additions[itemText].quantity += quantity;
         }
     });
 
-    // Add additions (Motor Oil Change, Advance Repair Kit)
-    document.querySelectorAll('.repair:not([data-repair]):checked').forEach(repair => {
-        let itemText = repair.nextSibling.textContent.trim();
-        let itemValue = parseFloat(repair.value) * vehicleMultiplier;
-        total += itemValue;
+    // Now, add each addition with the correct quantity and total value
+    for (const item in additions) {
+        let { totalValue, quantity } = additions[item];
         let li = document.createElement('li');
-        li.textContent = `${itemText}: $${itemValue.toFixed(2)}`;
+        li.textContent = `${item} (x${quantity}): $${totalValue.toFixed(2)}`;
         billList.appendChild(li);
-    });
+        total += totalValue;
+    }
 
-    // Add Tow service charge
+    // Add tow service section
     document.querySelectorAll('input[name="tow"]:checked').forEach(tow => {
         const towDistance = parseFloat(tow.value);
         total += towDistance;
@@ -367,26 +477,42 @@ function updateBill() {
         billList.appendChild(li);
     });
 
-    totalSpan.textContent = total.toFixed(2);
+    // Add discount section
+    let discountRate = parseFloat(document.querySelector('input[name="discount"]:checked')?.value || 0);
+    
+    // Check if custom discount is provided
+    const customDiscount = document.getElementById('customDiscount').value;
+    if (customDiscount) {
+        discountRate = parseFloat(customDiscount) / 100;  // Convert to decimal
+    }
+    
+    let discountAmount = total * discountRate;
+    let discountedTotal = total - discountAmount;
+
+    if (discountRate > 0) {
+        let discountLi = document.createElement('li');
+        discountLi.innerHTML = `<strong>Discount (${(discountRate * 100).toFixed(0)}%): -$${discountAmount.toFixed(2)}</strong>`;
+        billList.appendChild(discountLi);
+    }
+
+    // Update total
+    totalSpan.textContent = discountedTotal.toFixed(2);
 }
+
 function copyBill() {
     let billText = `Repairing Bill of ${selectedVehicleText}:\n`;
     document.querySelectorAll('.bill-list li').forEach((li, index) => {
         if (index !== 0) billText += li.textContent + '\n';
     });
     billText += `Total: $${document.getElementById('total').textContent}`;
-    navigator.clipboard.writeText("Bill content copied").then(() => {
-                let popup = document.getElementById("popupMessage");
-                popup.style.display = "block";
 
-                // Hide popup after 2 seconds
-                setTimeout(() => {
-                    popup.style.display = "none";
-                }, 2000);
-            }).catch(err => {
-                console.error("Failed to copy: ", err);
-            });
-        
+    navigator.clipboard.writeText(billText).then(() => {
+        let popup = document.getElementById("popupMessage");
+        popup.style.display = "block";
+        setTimeout(() => { popup.style.display = "none"; }, 2000);
+    }).catch(err => {
+        console.error("Failed to copy: ", err);
+    });
 }
 
 </script>
