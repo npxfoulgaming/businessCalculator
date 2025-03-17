@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="wonderland.png" />
+    <title>Green Wonder Land Calculator</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
+<body>
+    <h1>Green Wonder Land Calculator</h1>
+
+    <button id="recipeBtn">Recipe Calculate</button>
+    
+    <div id="recipePopup" class="popup hidden">
+        <button id="closePopup" class="close-btn">✖</button>
+        <h2>Recipe Calculator</h2>
+        <label>Brownies: <input type="number" id="browniesQty" class="burger-qty-input" min="0" value="0"></label>
+        <label>Weed Gummies: <input type="number" id="wGummiesQty" class="burger-qty-input" min="0" value="0"></label>
+        <label>Joint: <input type="number" id="jointQty" class="burger-qty-input" min="0" value="0"></label>
+
+        <h3>Ingredients Needed:</h3>
+        <div id="ingredientsList"></div>
+    </div>
+    
+    <div class="container">
+        <div class="options">
+            <div class="section">
+                <h2>WL Items</h2>
+                <label>
+                    <input type="checkbox" value="800" class="food" data-repair="vape"> Vape
+                    <select class="quantity" data-food="vape">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="250" class="food" data-repair="penjamin"> Penjamin
+                    <select class="quantity" data-food="penjamin">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="880" class="food" data-repair="bong"> Bong
+                    <select class="quantity" data-food="bong">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="100" class="food" data-repair="rollingPaper"> Rolling Paper
+                    <select class="quantity" data-food="rollingPaper">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="150" class="food" data-repair="joint"> Joint
+                    <select class="quantity" data-food="joint">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="200" class="food" data-repair="brownies"> Brownies
+                    <select class="quantity" data-food="brownies">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                
+                <!-- Pills Section -->
+                <h2>Pills</h2>
+                <label>
+                    <input type="checkbox" value="400" class="food" data-repair="arenaPills"> Arena Pills
+                    <select class="quantity" data-food="arenaPills">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="1000" class="food" data-repair="zombiePills"> Zombie Pills
+                    <select class="quantity" data-food="zombiePills">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+
+                <!-- Refilling Section -->
+                <h2>Refilling</h2>
+                <label>
+                    <input type="checkbox" value="450" class="food" data-repair="vapeRefill"> Vape Refill
+                    <select class="quantity" data-food="vapeRefill">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+                <h2>Weed Planting/Farming</h2>
+                <label>
+                    <input type="checkbox" value="100" class="food" data-repair="weedSeeds"> Weed Seeds
+                    <select class="quantity" data-food="weedSeeds">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="bill">
+            <h2>Discount</h2>
+            <label><input type="radio" name="discount" value="0"> No Discount</label>
+            <label><input type="radio" name="discount" value="0.1"> 10% Discount</label>
+            <label><input type="radio" name="discount" value="0.2"> 20% Discount</label>
+            <label><input type="radio" name="discount" value="0.4"> 40% Discount</label>
+            <label><input type="radio" name="discount" value="0.8"> 80% Discount</label>
+            <label><input type="radio" name="discount" value="1"> 100% Discount</label>
+            <label><strong>Custom Discount:</strong></label>
+            <input type="number" id="customDiscount" name="discountCustom" min="0" max="100" step="0.01" placeholder="Enter custom discount %" class="custom-discount-input">
+        
+            <h2>Items Billing</h2>
+            <ul class="bill-list"></ul>
+            <p><strong>Total: Rs <span id="total">0</span></strong></p>
+            <button class="copy-btn" onclick="copyBill()">Copy Bill
+                <span class="popup-message" id="popupMessage">bill copied successfully!</span>
+            </button>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>

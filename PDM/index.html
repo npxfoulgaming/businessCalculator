@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="pdm.png" />
+    <title>PDM Vehicle Commission Calculator</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+
+</head>
+<body>
+    <div class="container">
+        <h2>PDM Vehicle Commission Calculator</h2>
+        
+        <div class="input-group">
+            <label for="commission">Commission Percentage (%):</label>
+            <input type="number" id="commission" value="10" oninput="calculateCommission()">
+        </div>
+        
+        <div class="input-group">
+            <label for="price">Vehicle Price ($):</label>
+            <input type="number" id="price" placeholder="Enter vehicle price" oninput="calculateCommission()">
+        </div>
+        
+        <button onclick="calculateCommission()">Calculate</button>
+        
+        <div class="result-container">
+            <p id="result">Commission: $0.00</p>
+            <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
+        </div>
+        
+        <div class="popup" id="popup">Commission details copied!!</div>
+    </div>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>

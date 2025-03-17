@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="burgershot.png" />
+    <title>Legacy Nepal - BurgerShot Calculator</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
+<body>
+    <h1>Legacy Nepal BurgerShot Calculator</h1>
+    <div class="container">
+        <div class="options">
+            <div class="section">
+                <h2>Burgers</h2>
+                <label>
+                    <input type="checkbox" value="50" class="food" data-repair="hamBurger"> Ham Burger
+                    <select class="quantity" data-food="hamBurger">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="60" class="food" data-repair="cheeseBurger"> Cheese Burger
+                    <select class="quantity" data-food="cheeseBurger">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="60" class="food" data-repair="baconcheeseBurger"> Bacon Cheese Burger
+                    <select class="quantity" data-food="baconcheeseBurger">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                    <label>
+                        <input type="checkbox" value="60" class="food" data-repair="baconeggBurger"> Bacon n' Egg Burger
+                        <select class="quantity" data-food="baconeggBurger">
+                            <option value="1">1x</option>
+                            <option value="2">2x</option>
+                            <option value="3">3x</option>
+                            <option value="4">4x</option>
+                            <option value="5">5x</option>
+                            <option value="6">6x</option>
+                            <option value="7">7x</option>
+                            <option value="8">8x</option>
+                            <option value="9">9x</option>
+                            <option value="10">10x</option>
+                            <option value="15">15x</option>
+                            <option value="20">20x</option>
+                        </select>
+                    </label>
+                </label>
+                <label>
+                    <input type="checkbox" value="40" class="food" data-repair="vegBurger"> Veg Burger
+                    <select class="quantity" data-food="vegBurger">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>Pizza's</h2>
+                <label>
+                    <input type="checkbox" value="50" class="food" data-repair="hamPizza"> Ham Pizza
+                    <select class="quantity" data-food="hamPizza">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="40" class="food" data-repair="hawaiianPizza"> Hawaiian Pizza
+                    <select class="quantity" data-food="hawaiianPizza">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="60" class="food" data-repair="margheritaPizza"> Margherita Pizza
+                    <select class="quantity" data-food="margheritaPizza">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="30" class="food" data-repair="pepperoniPizza"> Pepperoni Pizza
+                    <select class="quantity" data-food="pepperoniPizza">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>Cakes</h2>
+                <label>
+                    <input type="checkbox" value="50" class="food" data-repair="berryCake"> Berry Cake
+                    <select class="quantity" data-food="berryCake">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="40" class="food" data-repair="cheeseCake"> Cheese Cake
+                    <select class="quantity" data-food="cheeseCake">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="60" class="food" data-repair="chocolateCake"> Chocolate Cake
+                    <select class="quantity" data-food="chocolateCake">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="30" class="food" data-repair="cupCake"> Cup Cake
+                    <select class="quantity" data-food="cupCake">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>Ramens</h2>
+                <label>
+                    <input type="checkbox" value="50" class="food" data-repair="spicyRamen"> Spicy Ramen
+                    <select class="quantity" data-food="spicyRamen">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="40" class="food" data-repair="ramen"> Ramen
+                    <select class="quantity" data-food="ramen">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>Addition Foods</h2>
+                <label>
+                    <input type="checkbox" value="30" class="food" data-repair="frenchFries"> French Fries
+                    <select class="quantity" data-food="frenchFries">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="30" class="food" data-repair="chickenNuggets"> Chicken Nuggets
+                    <select class="quantity" data-food="chickenNuggets">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="30" class="food" data-repair="grilledBacon"> Grilled Bacon
+                    <select class="quantity" data-food="grilledBacon">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="30" class="food" data-repair="friedEgg"> Fried Egg
+                    <select class="quantity" data-food="friedEgg">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="30" class="food" data-repair="beansToast"> Beans on Toast
+                    <select class="quantity" data-food="beansToast">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="30" class="food" data-repair="kinderEgg"> Kinder Susprise Egg
+                    <select class="quantity" data-food="kinderEgg">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>Drinks</h2>
+                <label>
+                    <input type="checkbox" value="10" class="food" data-repair="water"> Water
+                    <select class="quantity" data-food="water">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="50" class="food" data-repair="avocadoSmoothie"> Avocado Smoothie
+                    <select class="quantity" data-food="avocadoSmoothie">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="40" class="food" data-repair="greenApple"> Green Apple
+                    <select class="quantity" data-food="greenApple">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="15" class="food" data-repair="coke"> Coke
+                    <select class="quantity" data-food="coke">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="10" class="food" data-repair="pepsi"> Pepsi
+                    <select class="quantity" data-food="pepsi">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="10" class="food" data-repair="sprite"> Sprite
+                    <select class="quantity" data-food="sprite">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="10" class="food" data-repair="fantaLight"> Fanta Light
+                    <select class="quantity" data-food="fantaLight">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="10" class="food" data-repair="beanCoffee"> Bean Coffee
+                    <select class="quantity" data-food="beanCoffee">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="section">
+                <h2>Meal Packs</h2>
+                <label>
+                    <input type="checkbox" value="400" class="food" data-repair="emsMeal"> EMS Meal
+                    <select class="quantity" data-food="emsMeal">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="450" class="food" data-repair="pdMeal"> PD Meal
+                    <select class="quantity" data-food="pdMeal">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="500" class="food" data-repair="comboPack"> Combo Pack
+                    <select class="quantity" data-food="comboPack">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="350" class="food" data-repair="seasonalPack"> Seasonal Pack
+                    <select class="quantity" data-food="seasonalPack">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" value="300" class="food" data-repair="dailyPack"> Daily Pack
+                    <select class="quantity" data-food="dailyPack">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="15">15x</option>
+                        <option value="20">20x</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="bill">
+            <h2>Discount</h2>
+            <label><input type="radio" name="discount" value="0"> No Discount</label>
+            <label><input type="radio" name="discount" value="0.1"> 10% Discount</label>
+            <label><input type="radio" name="discount" value="0.2"> 20% Discount</label>
+            <label><input type="radio" name="discount" value="0.4"> 40% Discount</label>
+            <label><input type="radio" name="discount" value="0.8"> 80% Discount</label>
+            <label><input type="radio" name="discount" value="1"> 100% Discount</label>
+            <label><strong>Custom Discount:</strong></label>
+            <input type="number" id="customDiscount" name="discountCustom" min="0" max="100" step="0.01" placeholder="Enter custom discount %" class="custom-discount-input">
+        
+            <h2>Foods Billing</h2>
+            <ul class="bill-list"></ul>
+            <p><strong>Total: Rs <span id="total">0</span></strong></p>
+            <button class="copy-btn" onclick="copyBill()">Copy Bill
+                <span class="popup-message" id="popupMessage">bill copied successfully!</span>
+            </button>
+
+            <!-- Meal descriptions -->
+            <div id="emsMealDescription" class="meal-description hidden">Hamburger 2x, Fried 2x</div>
+            <div id="pdMealDescription" class="meal-description hidden">Hamburger 2x, Fried 2x, Water 2x</div>
+            <div id="comboPackDescription" class="meal-description hidden">Hamburger 2x, Fried 2x, Cheese Burger 3x</div>
+            <div id="seasonalPackDescription" class="meal-description hidden">Hamburger 2x, Fried 2x, Cheese Burger 3x, Coke 5x</div>
+            <div id="dailyPackDescription" class="meal-description hidden">Hamburger 2x, Fried 2x, Coke 2x</div>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>

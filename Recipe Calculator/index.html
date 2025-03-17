@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="burgershot.png" />
+    <title>Legacy Nepal Recipe Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Legacy Nepal Recipe Calculator eg.(BurgerShot)</h1>
+    <button id="recipeBtn">Recipe Calculate</button>
+    
+    <div id="recipePopup" class="popup hidden">
+        <button id="closePopup" class="close-btn">✖</button>
+        <h2>Recipe Calculator</h2>
+        <label>Ham Burger: <input type="number" id="hamBurgerQty" class="burger-qty-input" min="0" value="0"></label>
+        <label>Cheese Burger: <input type="number" id="cheeseBurgerQty" class="burger-qty-input" min="0" value="0"></label>
+        <label>Bacon Cheese Burger: <input type="number" id="baconCheeseBurgerQty" class="burger-qty-input" min="0" value="0"></label>
+        <label>Bacon n' Egg Burger: <input type="number" id="baconEggBurgerQty" class="burger-qty-input" min="0" value="0"></label>
+        <label>Veggie Burger: <input type="number" id="vegBurgerQty" class="burger-qty-input" min="0" value="0"></label>
+
+        <h3>Ingredients Needed:</h3>
+        <div id="ingredientsList"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

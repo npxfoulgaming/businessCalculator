@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="tuner.png" />
+    <title>Legacy Roleplay Nepal - Tuner Calculator</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
+<body>
+    <h1>Legacy Roleplay Nepal Tuner Calculator</h1>
+
+    <button id="commissionBtn">Commission</button>
+
+    <!-- Overlay that will cover the page when the popup is open -->
+    <div id="overlay"></div>
+    
+    <div id="commissionPopup" class="popup">
+        <div class="popup-content">
+            <button1 class="close-btn" id="closePopup"></button1>
+            <h2>Tuner Commission Check</h2>
+            <p>While selling the vehicle, you will receive a 10% commission from the vehicle price.</p>
+            
+            <label><strong>Vehicle Price:</strong></label>
+            <input type="number" id="vehiclePrice" placeholder="Enter Vehicle Price"/>
+    
+            <p><strong>Commission of Vehicle:</strong> $<span id="commissionAmount">0</span></p>
+    
+            <button id="copyCommission">Copy Commission</button>
+        </div>
+    </div>       
+
+    <div class="container">
+        <div class="options">
+            <div class="section">
+                <h2>Brakes</h2>
+                <label><input type="radio" name="brakes" value="0"> Stock Brakes</label>
+                <label><input type="radio" name="brakes" value="2000"> Street Brakes</label>
+                <label><input type="radio" name="brakes" value="3000"> Sport Brakes</label>
+                <label><input type="radio" name="brakes" value="4000"> Race Brakes</label>
+            </div>
+
+            <div class="section">
+                <h2>Transmission</h2>
+                <label><input type="radio" name="transmission" value="0"> Stock Transmission</label>
+                <label><input type="radio" name="transmission" value="1000"> Street Transmission</label>
+                <label><input type="radio" name="transmission" value="1500"> Sports Transmission</label>
+                <label><input type="radio" name="transmission" value="1800"> Race Transmission</label>
+            </div>
+
+            <div class="section">
+                <h2>Suspension</h2>
+                <label><input type="radio" name="suspension" value="0"> Stock Suspension</label>
+                <label><input type="radio" name="suspension" value="2000"> Lowered Suspension</label>
+                <label><input type="radio" name="suspension" value="2100"> Street Suspension</label>
+                <label><input type="radio" name="suspension" value="3500"> Sport Suspension</label>
+                <label><input type="radio" name="suspension" value="4000"> Competition Suspension</label>
+            </div>
+
+            <div class="section">
+                <h2>Armor</h2>
+                <label><input type="radio" name="armor" value="0"> Stock Armor</label>
+                <label><input type="radio" name="armor" value="1000"> Armor Upgrade 20%</label>
+                <label><input type="radio" name="armor" value="3000"> Armor Upgrade 40%</label>
+                <label><input type="radio" name="armor" value="4000"> Armor Upgrade 60%</label>
+                <label><input type="radio" name="armor" value="5000"> Armor Upgrade 80%</label>
+                <label><input type="radio" name="armor" value="7300"> Armor Upgrade 100%</label>
+            </div>
+
+            <div class="section">
+                <h2>Turbo</h2>
+                <label><input type="radio" name="turbo" value="0"> None</label>
+                <label><input type="radio" name="turbo" value="6000"> Turbo Tuning</label>
+            </div>
+
+            <div class="section">
+                <h2>Engine Tunes</h2>
+                <label><input type="radio" name="engine" value="0"> Stock</label>
+                <label><input type="radio" name="engine" value="2500"> EMS Upgrade, level 2</label>
+                <label><input type="radio" name="engine" value="3500"> EMS Upgrade, level 3</label>
+                <label><input type="radio" name="engine" value="5000"> EMS Upgrade, level 4</label>
+                <label><input type="radio" name="engine" value="8000"> EMS Upgrade, level 5</label>
+            </div>
+            
+            <div class="section">
+                <h2>Systems</h2>
+                <label><input type="checkbox" name="systems" value="3500"> Alert Systems</label>
+                <label><input type="checkbox" name="systems" value="2500"> Heated Seats</label>
+                <label><input type="checkbox" name="systems" value="5200"> Rainbow Neon</label>
+                <label><input type="checkbox" name="systems" value="5000"> Security Locks</label>
+            </div>            
+
+            <div class="section">
+                <h2>Windows</h2>
+                <label><input type="radio" name="window" value="50"> None</label>
+                <label><input type="radio" name="window" value="100"> Pure Black</label>
+                <label><input type="radio" name="window" value="200"> Darksmoke</label>
+                <label><input type="radio" name="window" value="200"> Lightsmoke</label>
+                <label><input type="radio" name="window" value="200"> Limo</label>
+                <label><input type="radio" name="window" value="200"> Green</label>
+            </div>
+
+            <div class="section">
+                <h2>Bumpers</h2>
+                <label><input type="checkbox" name="bumper" value="50"> Front Bumpers</label>
+                <label><input type="checkbox" name="bumper" value="100"> Rear Bumpers</label>
+            </div> 
+            <div class="section">
+                <h2>Liveries</h2>
+                <label><input type="radio" name="liverie" value="0"> Stock Liveries</label>
+                <label><input type="radio" name="liverie" value="100"> Any Liveries</label>
+            </div> 
+            <div class="section">
+                <h2>Addition Upgrade</h2>
+                <label><input type="checkbox" name="addition" value="30"> Extras</label>
+                <label><input type="checkbox" name="addition" value="600"> Cam Cover</label>
+                <label><input type="checkbox" name="addition" value="50"> Spoilers</label>
+                <label><input type="checkbox" name="addition" value="100"> Skirts</label>
+                <label><input type="checkbox" name="addition" value="200"> Exhausts</label>
+                <label><input type="checkbox" name="addition" value="300"> Grilles</label>
+                <label><input type="checkbox" name="addition" value="400"> Hoods</label>
+                <label><input type="checkbox" name="addition" value="500"> Bodykits</label>
+                <label><input type="checkbox" name="addition" value="600"> Modkits</label>
+                <label><input type="checkbox" name="addition" value="500"> Roofs</label>
+                <label><input type="checkbox" name="addition" value="600"> Modkit</label>
+                <label><input type="checkbox" name="addition" value="600"> Wraps</label>
+            </div> 
+            <div class="section">
+                <h2>Chassis</h2>
+                <label><input type="checkbox" name="chassis" value="50"> Arch Cover</label>
+                <label><input type="checkbox" name="chassis" value="100"> Aerials</label>
+                <label><input type="checkbox" name="chassis" value="200"> Roof Scoops</label>
+                <label><input type="checkbox" name="chassis" value="300"> Tank</label>
+                <label><input type="checkbox" name="chassis" value="400"> Roll Cage</label>
+            </div> 
+            <div class="section">
+                <h2>Interior</h2>
+                <label><input type="checkbox" name="interior" value="50"> Interior Color</label>
+                <label><input type="checkbox" name="interior" value="100"> Dashboard Color</label>
+                <label><input type="checkbox" name="interior" value="200"> Trim Design</label>
+                <label><input type="checkbox" name="interior" value="300"> Seats</label>
+                <label><input type="checkbox" name="interior" value="400"> Steering Wheels</label>
+                <label><input type="checkbox" name="interior" value="400"> Trunk</label>
+            </div> 
+            <div class="section">
+                <h2>Plates</h2>
+                <label><input type="checkbox" name="plate" value="50"> License</label>
+                <label><input type="checkbox" name="plaes" value="100"> Vanity Plates</label>
+                <label><input type="checkbox" name="plate" value="200"> Trim Design</label>
+            </div>
+            <div class="section">
+                <h2>Lights</h2>
+                <label><input type="checkbox" name="light" value="50"> Headlights</label>
+                <label><input type="checkbox" name="light" value="100"> Xenon Color</label>
+                <label><input type="checkbox" name="light" value="200"> Neon Kits</label>
+            </div>
+            <div class="section">
+                <h2>Wheels</h2>
+                <label><input type="checkbox" name="wheel" value="50"> Wheel Typw</label>
+                <label><input type="checkbox" name="wheel" value="100"> Wheel Color</label>
+                <label><input type="checkbox" name="wheel" value="200"> Wheel Accessories</label>
+                <label><input type="checkbox" name="wheel" value="300"> Wheel Extras</label>
+            </div>
+            <div class="section">
+                <h2>Respray</h2>
+                <label><input type="checkbox" name="respray" value="50"> Primary</label>
+                <label><input type="checkbox" name="respray" value="100"> Secondary</label>
+                <label><input type="checkbox" name="respray" value="200"> Pearlescent</label>
+                <label><input type="checkbox" name="respray" value="300"> Presets</label>
+                <label><input type="checkbox" name="respray" value="300"> Random Color</label>
+            </div>
+
+        </div>
+
+        <div class="bill">
+            <h2>Discount</h2>
+            <div class="discount-options">
+                <label><input type="radio" name="discount" value="0"> No Discount</label>
+                <label><input type="radio" name="discount" value="0.1"> 10% Discount</label>
+                <label><input type="radio" name="discount" value="0.2"> 20% Discount</label>
+                <label><input type="radio" name="discount" value="0.4"> 40% Discount</label>
+                <label><input type="radio" name="discount" value="0.8"> 80% Discount</label>
+                <label><input type="radio" name="discount" value="1"> 100% Discount</label>
+            </div>
+
+            <label><strong>Custom Discount:</strong></label>
+            <input type="number" id="customDiscount" name="discountCustom" min="0" max="100" step="0.01" placeholder="Enter custom discount %" class="custom-discount-input">
+
+            <h2>Upgrading Bill</h2>
+            <ul class="bill-list"></ul>
+            <p><strong>Total: $<span id="total">0</span></strong></p>
+            <button class="copy-btn" onclick="copyBill()">Copy Bill
+                <span class="popup-message" id="popupMessage">bill copied successfully!</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
