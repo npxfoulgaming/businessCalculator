@@ -1,2 +1,2 @@
-# mechanicCalculator
-Mechanic Calculator of Legacy Roleplay Nepal
+# Legacy Roleplay Nepal All Business Calculator
+Calculator
