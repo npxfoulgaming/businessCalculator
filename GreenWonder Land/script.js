@@ -90,28 +90,44 @@ function copyBill() {
     const billItems = [...document.querySelectorAll('.bill-list li')];
     const popupMessage = document.getElementById('popupMessage');
     const totalElement = document.getElementById('total');
-    
-    // Check if there's anything to copy
-    if (billItems.length === 0 || !totalElement) {
-        showPopup("Nothing to copy!", "orange");
-        return;
+
+    if (!billItems.length || !totalElement) {
+        return showPopup("Nothing to copy!", "orange");
     }
 
     const billText = billItems.map(li => li.textContent).join('\n');
     const totalText = `Total: Rs ${totalElement.textContent}`;
     const fullText = `${billText}\n\n${totalText}`;
 
+    // Fallback if clipboard API fails (common in older FiveM CEF)
+    if (!navigator.clipboard) {
+        const textarea = document.createElement('textarea');
+        textarea.value = fullText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showPopup("Bill copied!", "green");
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            showPopup("Copy failed!", "red");
+        }
+        document.body.removeChild(textarea);
+        return;
+    }
+
     navigator.clipboard.writeText(fullText).then(() => {
-        showPopup("Bill copied to clipboard!", "green");
+        showPopup("Bill copied!", "green");
     }).catch(err => {
-        console.error("Copy failed:", err);
-        showPopup("Failed to copy!", "red");
+        console.error("Clipboard API failed:", err);
+        showPopup("Copy failed!", "red");
     });
 
     function showPopup(message, bgColor) {
         popupMessage.textContent = message;
         popupMessage.style.display = 'block';
         popupMessage.style.backgroundColor = bgColor;
+
         setTimeout(() => {
             popupMessage.style.display = 'none';
             popupMessage.textContent = '';
