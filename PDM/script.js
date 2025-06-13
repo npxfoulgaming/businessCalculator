@@ -16,6 +16,43 @@ function calculateCommission() {
 }
 
 function copyToClipboard() {
+    const popup = document.getElementById('popup');
+    const priceInput = document.getElementById('price');
+    const commissionInput = document.getElementById('commission');
+
+    const price = parseFloat(priceInput.value);
+    const commission = parseFloat(commissionInput.value);
+
+    if (isNaN(price) || price <= 0 || isNaN(commission)) {
+        showPopup("Invalid price or commission!", "orange");
+        return;
+    }
+
+    const commissionAmount = (price * commission) / 100;
+    const text = `Commission Rate: ${commission}%\nVehicle Price: ${price}\nCommission Price: ${commissionAmount.toFixed(2)}`;
+
+    navigator.clipboard.writeText(text).then(() => {
+        showPopup("Copied commission details!", "green");
+    }).catch(err => {
+        console.error("Copy failed:", err);
+        showPopup("Failed to copy!", "red");
+    });
+
+    function showPopup(message, bgColor) {
+        if (!popup) return;
+        popup.textContent = message;
+        popup.style.display = 'block';
+        popup.style.backgroundColor = bgColor;
+        setTimeout(() => {
+            popup.style.display = 'none';
+            popup.textContent = '';
+            popup.style.backgroundColor = '';
+        }, 3000);
+    }
+}
+
+/*
+function copyToClipboard() {
     let price = parseFloat(document.getElementById('price').value);
     let commission = parseFloat(document.getElementById('commission').value);
     let commissionAmount = (isNaN(price) || price <= 0) ? 0 : (price * commission) / 100;
@@ -28,3 +65,4 @@ function copyToClipboard() {
         }, 5000);
     });
 }
+*/

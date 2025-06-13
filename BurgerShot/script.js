@@ -87,6 +87,41 @@ function updateBill() {
 }
 
 function copyBill() {
+    const billItems = [...document.querySelectorAll('.bill-list li')];
+    const popupMessage = document.getElementById('popupMessage');
+    const totalElement = document.getElementById('total');
+    
+    // Check if there's anything to copy
+    if (billItems.length === 0 || !totalElement) {
+        showPopup("Nothing to copy!", "orange");
+        return;
+    }
+
+    const billText = billItems.map(li => li.textContent).join('\n');
+    const totalText = `Total: Rs ${totalElement.textContent}`;
+    const fullText = `${billText}\n\n${totalText}`;
+
+    navigator.clipboard.writeText(fullText).then(() => {
+        showPopup("Bill copied to clipboard!", "green");
+    }).catch(err => {
+        console.error("Copy failed:", err);
+        showPopup("Failed to copy!", "red");
+    });
+
+    function showPopup(message, bgColor) {
+        popupMessage.textContent = message;
+        popupMessage.style.display = 'block';
+        popupMessage.style.backgroundColor = bgColor;
+        setTimeout(() => {
+            popupMessage.style.display = 'none';
+            popupMessage.textContent = '';
+            popupMessage.style.backgroundColor = '';
+        }, 2000);
+    }
+}
+
+/*
+function copyBill() {
     const billText = [...document.querySelectorAll('.bill-list li')].map(li => li.textContent).join('\n');
     const totalText = `Total: Rs ${document.getElementById('total').textContent}`;
     const fullText = `${billText}\n\n${totalText}`;
@@ -99,7 +134,7 @@ function copyBill() {
         }, 2000);
     });
 }
-
+*/
 
 //-------------------------------------//
 
@@ -120,6 +155,31 @@ window.addEventListener('click', function(event) {
     }
 });
 
+function copyToClipboard(text, iconElement) {
+    if (!text || text.trim() === "") {
+        iconElement.innerHTML = "❌";
+        setTimeout(() => {
+            iconElement.innerHTML = "📋";
+        }, 1000);
+        console.warn("Nothing to copy!");
+        return;
+    }
+
+    navigator.clipboard.writeText(text).then(() => {
+        iconElement.innerHTML = "✅";
+        setTimeout(() => {
+            iconElement.innerHTML = "📋";
+        }, 1000);
+    }).catch(err => {
+        console.error("Failed to copy:", err);
+        iconElement.innerHTML = "❌";
+        setTimeout(() => {
+            iconElement.innerHTML = "📋";
+        }, 1000);
+    });
+}
+
+/*
 // Function to copy recipe text
 function copyToClipboard(text, iconElement) {
     navigator.clipboard.writeText(text).then(() => {
@@ -132,7 +192,7 @@ function copyToClipboard(text, iconElement) {
         console.log('Failed to copy:', err);
     });
 }
-
+*/
 // Function to update recipe dynamically
 function updateRecipe() {
     const hamQty = parseInt(document.getElementById('hamBurgerQty').value) || 0;

@@ -94,6 +94,43 @@ function updateBill() {
 }
 
 function copyBill() {
+    const popup = document.getElementById("popupMessage");
+    const billItems = document.querySelectorAll('.bill-list li');
+    const totalElement = document.getElementById('total');
+
+    if (!totalElement || billItems.length === 0) {
+        showPopup("Nothing to copy!", "orange");
+        return;
+    }
+
+    let billText = `Legacy Roleplay Nepal Tuner Bill:\n`;
+    billItems.forEach(li => {
+        billText += li.textContent + '\n';
+    });
+    billText += `Total: $${totalElement.textContent}`;
+
+    navigator.clipboard.writeText(billText).then(() => {
+        showPopup("Bill copied to clipboard!", "green");
+    }).catch(err => {
+        console.error("Failed to copy:", err);
+        showPopup("Failed to copy bill!", "red");
+    });
+
+    function showPopup(message, bgColor) {
+        if (!popup) return;
+        popup.textContent = message;
+        popup.style.display = "block";
+        popup.style.backgroundColor = bgColor;
+        setTimeout(() => {
+            popup.style.display = "none";
+            popup.textContent = "";
+            popup.style.backgroundColor = "";
+        }, 2000);
+    }
+}
+
+/*
+function copyBill() {
     let billText = `Legacy Roleplay Nepal Tuner Bill:\n`;
     document.querySelectorAll('.bill-list li').forEach(li => {
         billText += li.textContent + '\n';
@@ -108,6 +145,7 @@ function copyBill() {
         console.error("Failed to copy: ", err);
     });
 }
+*/
 
 // Show the popup and overlay
 document.getElementById('commissionBtn').addEventListener('click', function() {

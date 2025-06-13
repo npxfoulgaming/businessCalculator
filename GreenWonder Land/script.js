@@ -86,6 +86,40 @@ function updateBill() {
     totalSpan.textContent = total.toFixed(2);
 }
 
+function copyBill() {
+    const billItems = [...document.querySelectorAll('.bill-list li')];
+    const popupMessage = document.getElementById('popupMessage');
+    const totalElement = document.getElementById('total');
+    
+    // Check if there's anything to copy
+    if (billItems.length === 0 || !totalElement) {
+        showPopup("Nothing to copy!", "orange");
+        return;
+    }
+
+    const billText = billItems.map(li => li.textContent).join('\n');
+    const totalText = `Total: Rs ${totalElement.textContent}`;
+    const fullText = `${billText}\n\n${totalText}`;
+
+    navigator.clipboard.writeText(fullText).then(() => {
+        showPopup("Bill copied to clipboard!", "green");
+    }).catch(err => {
+        console.error("Copy failed:", err);
+        showPopup("Failed to copy!", "red");
+    });
+
+    function showPopup(message, bgColor) {
+        popupMessage.textContent = message;
+        popupMessage.style.display = 'block';
+        popupMessage.style.backgroundColor = bgColor;
+        setTimeout(() => {
+            popupMessage.style.display = 'none';
+            popupMessage.textContent = '';
+            popupMessage.style.backgroundColor = '';
+        }, 2000);
+    }
+}
+
 //-------------------------------------//
 
 document.getElementById('recipeBtn').addEventListener('click', function() {
@@ -105,6 +139,7 @@ window.addEventListener('click', function(event) {
     }
 });
 
+/*
 // Function to copy recipe text
 function copyToClipboard(text, iconElement) {
     navigator.clipboard.writeText(text).then(() => {
@@ -116,6 +151,48 @@ function copyToClipboard(text, iconElement) {
     }).catch(err => {
         console.log('Failed to copy:', err);
     });
+}
+*/
+
+function copyToClipboard(text, iconElement) {
+    const popup = document.getElementById("popupMessage");
+
+    // Check if there's text to copy
+    if (!text || text.trim() === "") {
+        iconElement.innerHTML = "❌";
+        showPopup("Nothing to copy!", "orange");
+        setTimeout(() => {
+            iconElement.innerHTML = "📋";
+        }, 1000);
+        return;
+    }
+
+    navigator.clipboard.writeText(text).then(() => {
+        iconElement.innerHTML = "✅";
+        showPopup("Copied to clipboard!", "green");
+        setTimeout(() => {
+            iconElement.innerHTML = "📋";
+        }, 1000);
+    }).catch(err => {
+        console.error("Failed to copy:", err);
+        iconElement.innerHTML = "❌";
+        showPopup("Failed to copy!", "red");
+        setTimeout(() => {
+            iconElement.innerHTML = "📋";
+        }, 1000);
+    });
+
+    function showPopup(message, color) {
+        if (!popup) return;
+        popup.textContent = message;
+        popup.style.display = "block";
+        popup.style.backgroundColor = color;
+        setTimeout(() => {
+            popup.style.display = "none";
+            popup.textContent = "";
+            popup.style.backgroundColor = "";
+        }, 2000);
+    }
 }
 
 // Function to update recipe dynamically
