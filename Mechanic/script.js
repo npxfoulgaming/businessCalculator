@@ -141,7 +141,46 @@ function updateBill() {
     totalSpan.textContent = discountedTotal.toFixed(2);
 }
 
+function copyBill() {
+    const billItems = document.querySelectorAll('.bill-list li');
+    const total = document.getElementById('total').textContent;
+    const popup = document.getElementById("popupMessage");
+
+    // Check if there are any items in the bill (excluding title if present)
+    if (billItems.length <= 1) {
+        showPopup("Nothing to copy!", "red");
+        return;
+    }
+
+    // Build the bill text
+    let billText = `Repairing Bill of ${selectedVehicleText}:\n`;
+    billItems.forEach((li, index) => {
+        if (index !== 0) billText += li.textContent + '\n';
+    });
+    billText += `Total: $${total}`;
+
+    // Try to copy
+    navigator.clipboard.writeText(billText).then(() => {
+        showPopup("Bill copied to clipboard!", "green");
+    }).catch(err => {
+        console.error("Clipboard error:", err);
+        showPopup("Failed to copy bill!", "red");
+    });
+
+    function showPopup(message, color) {
+        popup.textContent = message;
+        popup.style.display = "block";
+        popup.style.backgroundColor = color;
+        setTimeout(() => {
+            popup.style.display = "none";
+            popup.style.backgroundColor = "";
+            popup.textContent = "";
+        }, 2000);
+    }
+}
+
 /*
+
 function copyBill() {
     let billText = `Repairing Bill of ${selectedVehicleText}:\n`;
     document.querySelectorAll('.bill-list li').forEach((li, index) => {
@@ -156,7 +195,7 @@ function copyBill() {
     }).catch(err => {
         console.error("Failed to copy: ", err);
     });
-} */
+} 
 
 function copyBill() {
     const vehicleName = typeof selectedVehicleText !== 'undefined' ? selectedVehicleText : "Unknown Vehicle";
@@ -215,3 +254,4 @@ function showPopup(message, isError = false) {
     setTimeout(() => { popup.style.display = "none"; }, 2000);
 }
 
+*/
