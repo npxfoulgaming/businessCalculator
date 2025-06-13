@@ -176,29 +176,21 @@ function copyBill() {
 
     billText += `Total: $${total}`;
 
-    // Try browser clipboard API
-    navigator.clipboard.writeText(billText).then(() => {
-        showPopup("Bill copied successfully!");
-    }).catch(err => {
-        console.warn("Clipboard failed, attempting FiveM fallback:", err);
+    // Clipboard method (works in browsers & CEF if allowed)
+    try {
+        // Create a temporary textarea
+        const textarea = document.createElement('textarea');
+        textarea.value = billText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
 
-        // Fallback for FiveM CEF (e.g., with NUI)
-        try {
-            fetch(`https://${GetParentResourceName()}/copyToClipboard`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: billText })
-            }).then(() => {
-                showPopup("Bill copied via FiveM!");
-            }).catch(err => {
-                showPopup("Copy failed!", true);
-                console.error(err);
-            });
-        } catch (e) {
-            console.error("Clipboard fallback failed:", e);
-            showPopup("Copy failed!", true);
-        }
-    });
+        showPopup("Bill copied successfully!");
+    } catch (err) {
+        console.error("Clipboard copy failed:", err);
+        showPopup("Copy failed!", true);
+    }
 }
 
 function showPopup(message, isError = false) {
