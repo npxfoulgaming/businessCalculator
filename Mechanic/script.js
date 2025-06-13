@@ -141,6 +141,7 @@ function updateBill() {
     totalSpan.textContent = discountedTotal.toFixed(2);
 }
 
+/*
 function copyBill() {
     let billText = `Repairing Bill of ${selectedVehicleText}:\n`;
     document.querySelectorAll('.bill-list li').forEach((li, index) => {
@@ -155,4 +156,55 @@ function copyBill() {
     }).catch(err => {
         console.error("Failed to copy: ", err);
     });
+} */
+
+function copyBill() {
+    const vehicleName = typeof selectedVehicleText !== 'undefined' ? selectedVehicleText : "Unknown Vehicle";
+    const listItems = document.querySelectorAll('.bill-list li');
+    const total = document.getElementById('total')?.textContent || "0";
+
+    if (listItems.length === 0) {
+        showPopup("No items to copy!", true);
+        return;
+    }
+
+    let billText = `Repairing Bill of ${vehicleName}:\n`;
+
+    listItems.forEach(li => {
+        billText += `• ${li.textContent.trim()}\n`;
+    });
+
+    billText += `Total: $${total}`;
+
+    // Try browser clipboard API
+    navigator.clipboard.writeText(billText).then(() => {
+        showPopup("Bill copied successfully!");
+    }).catch(err => {
+        console.warn("Clipboard failed, attempting FiveM fallback:", err);
+
+        // Fallback for FiveM CEF (e.g., with NUI)
+        try {
+            fetch(`https://${GetParentResourceName()}/copyToClipboard`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: billText })
+            }).then(() => {
+                showPopup("Bill copied via FiveM!");
+            }).catch(err => {
+                showPopup("Copy failed!", true);
+                console.error(err);
+            });
+        } catch (e) {
+            console.error("Clipboard fallback failed:", e);
+            showPopup("Copy failed!", true);
+        }
+    });
+}
+
+function showPopup(message, isError = false) {
+    const popup = document.getElementById("popupMessage");
+    popup.textContent = message;
+    popup.style.display = "block";
+    popup.style.backgroundColor = isError ? "#ff4d4d" : "#4CAF50";
+    setTimeout(() => { popup.style.display = "none"; }, 2000);
 }
