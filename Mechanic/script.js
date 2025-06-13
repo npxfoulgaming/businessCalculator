@@ -176,19 +176,33 @@ function copyBill() {
 
     billText += `Total: $${total}`;
 
-    // Clipboard method (works in browsers & CEF if allowed)
+    // --- CEF & Browser Safe Clipboard Copy ---
     try {
-        // Create a temporary textarea
         const textarea = document.createElement('textarea');
         textarea.value = billText;
+
+        // Required styles for CEF compatibility
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.width = '1px';
+        textarea.style.height = '1px';
+        textarea.style.opacity = '0';
+
         document.body.appendChild(textarea);
+        textarea.focus();
         textarea.select();
-        document.execCommand('copy');
+
+        const successful = document.execCommand('copy');
         document.body.removeChild(textarea);
 
-        showPopup("Bill copied successfully!");
+        if (successful) {
+            showPopup("Bill copied successfully!");
+        } else {
+            showPopup("Copy failed!", true);
+        }
     } catch (err) {
-        console.error("Clipboard copy failed:", err);
+        console.error("Copy error:", err);
         showPopup("Copy failed!", true);
     }
 }
@@ -200,3 +214,4 @@ function showPopup(message, isError = false) {
     popup.style.backgroundColor = isError ? "#ff4d4d" : "#4CAF50";
     setTimeout(() => { popup.style.display = "none"; }, 2000);
 }
+
